@@ -55,15 +55,6 @@ To run the notebook successfully, the following tools are recommended:
 
 A virtual environment is already provided in the project root under `agentpy_env/`, which is suitable for running the simulation.
 
-## How to run
-
-From the project root, activate the environment and open the notebook:
-
-```bash
-cd "/home/ezekiel/Documents/Projects/Intelligent Systems/Ibasco-Ezekiel-CS0065-AN42"
-source agentpy_env/bin/activate
-jupyter notebook TA1/random_walk.ipynb
-```
 
 If using VS Code, simply open `TA1/random_walk.ipynb` and run the cells in order.
 
