@@ -56,8 +56,8 @@ To run the notebook successfully, you need:
 From the project root, activate the environment and open the notebook:
 
 ```bash
-cd "/home/ezekiel/Documents/Projects/Intelligent Systems/Ibasco-Ezekiel-CS0065-AN42"
-source agentpy_env/bin/activate
+cd "path"
+source agentpy_env/bin/activate # sure to create a venv for agentpy
 jupyter notebook TA2/clean_a_room.ipynb
 ```
 
