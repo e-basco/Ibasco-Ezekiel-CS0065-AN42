@@ -51,18 +51,6 @@ To run the notebook successfully, you need:
 - Jupyter Notebook or VS Code with notebook support
 - Standard Python libraries only
 
-## How to run
-
-From the project root, activate the environment and open the notebook:
-
-```bash
-cd "path"
-source agentpy_env/bin/activate # sure to create a venv for agentpy
-jupyter notebook TA2/clean_a_room.ipynb
-```
-
-If using VS Code, you can open the notebook directly and run each cell in order.
-
 ## Author
 
 Ezekiel M. Ibasco
