@@ -1,122 +1,90 @@
+# Sentiment and Tone Analysis Program
 
-# Laboratory Activity 2: Sentiment Analysis
+## Overview
 
-This project contains a Python solution for Laboratory Activity 2. It is designed to run in Google Colab and includes the required sentiment-analysis activity and the challenge as separate cells.
+This Python program contains two independent text-analysis sections designed to run in Google Colab:
+
+1. **Sentiment Analysis** - uses TextBlob to classify 10 sentences as positive, neutral, or negative.
+2. **Tone Analysis Challenge** - counts happy and sad words using NLTK's Opinion Lexicon and determines the overall tone of one sentence.
 
 ## Requirements
 
-The notebook uses the following Python libraries:
+The program requires Python 3 and the following libraries:
 
-- `textblob` for polarity-based sentiment analysis
-- `nltk` for the public Opinion Lexicon dataset
-- `re`, from the Python standard library, for extracting words from sentences
+- `textblob`
+- `nltk`
 
-The import cell installs the external libraries automatically.
+The import cell installs these libraries in Google Colab and downloads the `opinion_lexicon` dataset.
 
-## How to Run in Google Colab
+## Running the Program in Google Colab
 
-1. Open [Google Colab](https://colab.research.google.com/).
-2. Create a new notebook.
-3. Add three code cells.
-4. Copy the supplied code into the cells in this order:
-   1. Import cell
-   2. Activity cell
-   3. Challenge cell
-5. Run the import cell first and wait for it to finish.
-6. Run the activity cell and enter 10 sentences when prompted.
-7. Run the challenge cell and enter one sentence when prompted.
-8. Take screenshots of the actual results produced by Google Colab.
+Place the code in three separate Colab cells and run them in this order:
 
-## Import Cell
+1. **Import cell**
+2. **Activity cell**
+3. **Challenge cell**
 
-The import cell performs the following tasks:
+The import cell must be run before either program section. The activity and challenge cells can then be run independently.
 
-- Installs TextBlob and NLTK.
-- Imports the required modules.
-- Downloads NLTK's public Opinion Lexicon dataset.
+## Sentiment Analysis
 
-This cell must be run before either of the program cells.
+The sentiment-analysis section asks the user to enter 10 sentences. Each sentence is passed to TextBlob, which calculates a polarity score from `-1` to `1`.
 
-## Activity: TextBlob Sentiment Analysis
+| Polarity | Classification |
+| --- | --- |
+| Less than `0` | Negative |
+| Equal to `0` | Neutral |
+| Greater than `0` | Positive |
 
-The activity asks the user to enter 10 sentences. Each sentence is analyzed using TextBlob's polarity score.
+After every entry, the program displays its classification and polarity score. After all 10 sentences have been processed, it displays the total number of positive, neutral, and negative sentences.
 
-The classifications are:
-
-- Polarity less than `0`: Negative
-- Polarity equal to `0`: Neutral
-- Polarity greater than `0`: Positive
-
-The program counts each classification and prints a summary after all 10 sentences have been entered.
-
-### Suggested Activity Inputs
-
-Enter these sentences one at a time:
-
-1. `I am very happy and excited today.`
-2. `This is the best day of my life.`
-3. `The movie was wonderful and enjoyable.`
-4. `I love spending time with my family.`
-5. `The food tastes delicious.`
-6. `I am sad and disappointed.`
-7. `This experience was terrible.`
-8. `I hate waiting for a long time.`
-9. `The book is on the table.`
-10. `Today is Wednesday.`
-
-TextBlob determines the final classification, so results depend on the polarity assigned by the library.
-
-## Challenge: Happy and Sad Word Analysis
-
-The challenge uses NLTK's Opinion Lexicon as a public dataset of positive and negative words.
-
-The program:
-
-1. Converts the sentence to lowercase.
-2. Removes punctuation and extracts individual words.
-3. Counts words found in the positive-word dataset.
-4. Counts words found in the negative-word dataset.
-5. Compares the two totals.
-
-The tone is classified as:
-
-- Positive when the happy-word count is higher.
-- Negative when the sad-word count is higher.
-- Neutral when both counts are equal.
-
-### Suggested Challenge Inputs
-
-Positive test:
+Example input:
 
 ```text
-I feel happy, wonderful, and excited.
+I am very happy and excited today.
 ```
 
-Negative test:
+## Tone Analysis Challenge
+
+The challenge section asks the user to enter one sentence. It extracts the words from the sentence, converts them to lowercase, and compares them with two lists from NLTK's public Opinion Lexicon:
+
+- Positive words are treated as happy words.
+- Negative words are treated as sad words.
+
+The tone is determined using the following rules:
+
+| Comparison | Tone |
+| --- | --- |
+| Happy count is greater than sad count | Positive |
+| Sad count is greater than happy count | Negative |
+| Both counts are equal | Neutral |
+
+The program displays the number of happy words, the number of sad words, and the resulting tone.
+
+Example input:
 
 ```text
-I feel sad, terrible, and lonely.
+I feel happy and excited, but my friend feels sad.
 ```
 
-Neutral test:
+## Functions
 
-```text
-The book is on the table.
-```
+### `extract_words(sentence)`
 
-Mixed test:
+Converts a sentence to lowercase and extracts words while ignoring punctuation.
 
-```text
-I am happy and excited, but my friend feels sad and lonely.
-```
+### `number_happy(sentence)`
 
-## Important Notes
+Returns the number of extracted words found in the positive-word dataset.
 
-- Internet access must be enabled when running the import cell because Colab needs to install the libraries and download the Opinion Lexicon dataset.
-- Run the cells in order to avoid missing-import or missing-dataset errors.
-- The submitted screenshots should show real program execution; this documentation does not include simulated output.
-- The challenge counts exact dataset matches. A related word may not be counted if its particular form is absent from the lexicon.
+### `number_sad(sentence)`
 
-## Reference Dataset
+Returns the number of extracted words found in the negative-word dataset.
 
-The challenge uses the NLTK Opinion Lexicon, a collection of English positive and negative opinion words maintained as part of the NLTK data packages.
+## Notes and Limitations
+
+- The program analyzes English text.
+- TextBlob assigns sentiment using its built-in language model, so a sentence's classification may differ from a person's interpretation.
+- The challenge counts individual words and does not fully understand context, sarcasm, or negation. For example, it may count the word `happy` in `not happy` as a happy word.
+- Repeated emotional words are counted each time they appear.
+- Words absent from the Opinion Lexicon do not affect the happy or sad totals.
